@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-4u)b$o@5v5hxwutu+&fl9^nh&(0t)@398hkc0)(_@!a03qo8$l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['todo-newlist.herokuapp.com']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'base.apps.BaseConfig',
     'django.contrib.admin',
     'crispy_forms',
     'django.contrib.auth',
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'base.apps.BaseConfig',
+    'whitenoise.runserver_nostatic',
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'todolistfuc.urls'
@@ -124,6 +127,7 @@ STATICFILES_DIRS=(
     os.path.join(BASE_DIR,'static'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
